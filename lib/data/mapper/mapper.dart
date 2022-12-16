@@ -2,7 +2,7 @@
 
 import 'package:advance_flutter/app/extensions.dart';
 import 'package:advance_flutter/data/responses/responses.dart';
-import 'package:advance_flutter/domain/model.dart';
+import 'package:advance_flutter/domain/model/model.dart';
 
 const EMPTY = "";
 const ZERO = 0;
