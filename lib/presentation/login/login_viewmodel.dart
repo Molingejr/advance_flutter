@@ -14,7 +14,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
-  LoginUseCase? _loginUseCase; // todo remove ?
+  LoginUseCase _loginUseCase;
 
   LoginViewModel(this._loginUseCase);
 
@@ -42,9 +42,9 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
-    (await _loginUseCase?.execute(
+    (await _loginUseCase.execute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        ?.fold(
+        .fold(
             (failure) => {
                   // left -> failure
                   print(failure.message)
