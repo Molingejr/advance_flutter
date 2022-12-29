@@ -31,7 +31,7 @@ class _AppServiceClient implements AppServiceClient {
       'email': email,
       'password': password,
       'imei': imei,
-      'deviceType': deviceType,
+      'device_type': deviceType,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AuthenticationResponse>(Options(
