@@ -12,6 +12,7 @@ enum StateRendererType {
   // POPUP STATES
   POPUP_LOADING_STATE,
   POPUP_ERROR_STATE,
+  POPUP_SUCCESS,
 
   // FULL SCREEN STATES
   FULL_SCREEN_LOADING_STATE,
@@ -27,11 +28,12 @@ class StateRenderer extends StatelessWidget {
   String title;
   Function? retryActionFunction;
 
-  StateRenderer({Key? key,
-    required this.stateRendererType,
-    String? message,
-    String? title,
-    required this.retryActionFunction})
+  StateRenderer(
+      {Key? key,
+      required this.stateRendererType,
+      String? message,
+      String? title,
+      required this.retryActionFunction})
       : message = message ?? AppStrings.loading,
         title = title ?? EMPTY,
         super(key: key);
@@ -44,28 +46,36 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.POPUP_LOADING_STATE:
-        return _getPopUpDialog(context, [_getAnimatedImage(JsonAssets.loading)]);
-      case StateRendererType.POPUP_ERROR_STATE:
         return _getPopUpDialog(
-            context, [
+            context, [_getAnimatedImage(JsonAssets.loading)]);
+      case StateRendererType.POPUP_ERROR_STATE:
+        return _getPopUpDialog(context, [
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
           _getRetryButton(AppStrings.ok, context)
         ]);
+      case StateRendererType.POPUP_SUCCESS:
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(JsonAssets.success),
+          _getMessage(title),
+          _getMessage(message),
+          _getRetryButton(AppStrings.ok, context)
+        ]);
       case StateRendererType.FULL_SCREEN_LOADING_STATE:
-        return _getItemsInColumn([_getAnimatedImage(JsonAssets.loading), _getMessage(message)]);
+        return _getItemsInColumn(
+            [_getAnimatedImage(JsonAssets.loading), _getMessage(message)]);
 
       case StateRendererType.FULL_SCREEN_ERROR_STATE:
-        return _getItemsInColumn(
-            [
-              _getAnimatedImage(JsonAssets.error),
-              _getMessage(message),
-              _getRetryButton(AppStrings.retryAgain, context)
-            ]);
+        return _getItemsInColumn([
+          _getAnimatedImage(JsonAssets.error),
+          _getMessage(message),
+          _getRetryButton(AppStrings.retryAgain, context)
+        ]);
       case StateRendererType.CONTENT_SCREEN_STATE:
         return Container();
       case StateRendererType.EMPTY_SCREEN_STATE:
-        return _getItemsInColumn([_getAnimatedImage(JsonAssets.empty), _getMessage(message)]);
+        return _getItemsInColumn(
+            [_getAnimatedImage(JsonAssets.empty), _getMessage(message)]);
       default:
         return Container();
     }
@@ -74,8 +84,7 @@ class StateRenderer extends StatelessWidget {
   Widget _getPopUpDialog(BuildContext context, List<Widget> children) {
     return Dialog(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s14)
-      ),
+          borderRadius: BorderRadius.circular(AppSize.s14)),
       elevation: AppSize.s1_5,
       backgroundColor: Colors.transparent,
       child: Container(
@@ -84,7 +93,8 @@ class StateRenderer extends StatelessWidget {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(AppSize.s14),
           boxShadow: const [
-            BoxShadow(color: Colors.black26,
+            BoxShadow(
+                color: Colors.black26,
                 blurRadius: AppSize.s12,
                 offset: Offset(AppSize.s0, AppSize.s12))
           ],
@@ -117,8 +127,8 @@ class StateRenderer extends StatelessWidget {
         padding: const EdgeInsets.all(AppPadding.p18),
         child: Text(
           message,
-          style: getMediumStyle(
-              color: ColorManager.black, fontSize: FontSize.s16),
+          style:
+              getMediumStyle(color: ColorManager.black, fontSize: FontSize.s16),
         ),
       ),
     );
