@@ -11,6 +11,7 @@ import 'package:advance_flutter/presentation/login/login_viewmodel.dart';
 import 'package:advance_flutter/presentation/register/register_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:advance_flutter/domain/usecase/forgot_password_usecase.dart';
 import 'package:advance_flutter/presentation/forgot_password/forgot_password_viewmodel.dart';
@@ -69,5 +70,6 @@ initRegisterModule() {
         .registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
     instance.registerFactory<RegisterViewModel>(
         () => RegisterViewModel(instance()));
+    instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }
