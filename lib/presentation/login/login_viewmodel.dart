@@ -57,7 +57,7 @@ class LoginViewModel extends BaseViewModel
                   // left -> failure
                   inputState.add(ErrorState(
                       StateRendererType.POPUP_ERROR_STATE,
-                      failure.message))
+                      failure.message)),
                 }, (data) {
       // right -> success (data)
       inputState.add(ContentState());
