@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:advance_flutter/app/app_prefs.dart';
 import 'package:advance_flutter/app/di.dart';
 import 'package:advance_flutter/data/mapper/mapper.dart';
 import 'package:advance_flutter/presentation/common/state_renderer/state_render_impl.dart';
@@ -11,6 +12,7 @@ import 'package:advance_flutter/presentation/resources/strings_manager.dart';
 import 'package:advance_flutter/presentation/resources/values_manager.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -23,6 +25,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   RegisterViewModel _viewModel = instance<RegisterViewModel>();
+  AppPreferences _appPreferences = instance<AppPreferences>();
   ImagePicker picker = instance<ImagePicker>();
   final _formKey = GlobalKey<FormState>();
 
@@ -54,6 +57,14 @@ class _RegisterViewState extends State<RegisterView> {
     _mobileNumberTextEditingController.addListener(() {
       _viewModel.setMobileNumber(_mobileNumberTextEditingController.text);
     });
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream
+        .listen((isSuccessLoggedIn) {
+      // navigate to main screen
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        _appPreferences.setIsUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
+    });
   }
 
   @override
@@ -82,7 +93,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _getContentWidget() {
     return Container(
-      padding: const EdgeInsets.only(top: AppPadding.p60),
+      padding: const EdgeInsets.only(top: AppPadding.p30),
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -111,9 +122,10 @@ class _RegisterViewState extends State<RegisterView> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(
+                      top: AppPadding.p20,
                       left: AppPadding.p28,
                       right: AppPadding.p28,
-                      bottom: AppPadding.p28),
+                      bottom: AppPadding.p12),
                   child: Row(
                     children: [
                       Expanded(
@@ -126,6 +138,7 @@ class _RegisterViewState extends State<RegisterView> {
                             },
                             initialSelection: "+237",
                             showCountryOnly: true,
+                            hideMainText: true,
                             showOnlyCountryWhenClosed: true,
                             favorite: ["+237", "+966" "+02", "+39"],
                           )),
@@ -150,7 +163,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
               Padding(
                 padding: const EdgeInsets.only(
                     left: AppPadding.p28, right: AppPadding.p28),
@@ -169,10 +182,12 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: AppPadding.p28, right: AppPadding.p28),
+                    top: AppPadding.p12,
+                    left: AppPadding.p28,
+                    right: AppPadding.p28),
                 child: StreamBuilder<String?>(
                   stream: _viewModel.outputErrorPassword,
                   builder: (context, snapshot) {
@@ -187,11 +202,14 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: AppPadding.p28, right: AppPadding.p28),
+                    top: AppPadding.p12,
+                    left: AppPadding.p28,
+                    right: AppPadding.p28),
                 child: Container(
+                  height: AppSize.s40,
                   decoration: BoxDecoration(
                       border: Border.all(color: ColorManager.lightGrey)),
                   child: GestureDetector(

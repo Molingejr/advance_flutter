@@ -49,14 +49,14 @@ class LoginViewModel extends BaseViewModel
   @override
   login() async {
     inputState.add(LoadingState(
-        stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
+        stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _loginUseCase.execute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold(
             (failure) => {
                   // left -> failure
                   inputState.add(ErrorState(
-                      StateRendererType.FULL_SCREEN_ERROR_STATE,
+                      StateRendererType.POPUP_ERROR_STATE,
                       failure.message))
                 }, (data) {
       // right -> success (data)

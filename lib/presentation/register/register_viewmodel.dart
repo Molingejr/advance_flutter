@@ -28,6 +28,9 @@ class RegisterViewModel extends BaseViewModel
   StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  StreamController isUserLoggedInSuccessfullyStreamController =
+  StreamController<bool>();
+
   RegisterUseCase _registerUseCase;
   var registerViewObject = RegisterObject("", "", "", "", "", "");
 
@@ -43,7 +46,7 @@ class RegisterViewModel extends BaseViewModel
   @override
   register() async {
     inputState.add(LoadingState(
-        stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
+        stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _registerUseCase.execute(RegisterUseCaseInput(
       registerViewObject.mobileNumber,
       registerViewObject.countryMobileCode,
@@ -56,13 +59,14 @@ class RegisterViewModel extends BaseViewModel
             (failure) => {
                   // left -> failure
                   inputState.add(ErrorState(
-                      StateRendererType.FULL_SCREEN_ERROR_STATE,
+                      StateRendererType.POPUP_ERROR_STATE,
                       failure.message))
                 }, (data) {
       // right -> success (data)
       inputState.add(ContentState());
 
       // navigate to main screen after the login
+      isUserLoggedInSuccessfullyStreamController.add(true);
     });
   }
 
@@ -74,6 +78,7 @@ class RegisterViewModel extends BaseViewModel
     _emailStreamController.close();
     _passwordStreamController.close();
     _profilePictureStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
     super.dispose();
   }
 
@@ -92,6 +97,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setEmail(String email) {
+    inputEmail.add(email);
     if (isEmailValid(email)) {
       // update register view object with email value
       registerViewObject = registerViewObject.copyWith(
@@ -105,6 +111,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setMobileNumber(String mobileNumber) {
+    inputMobileNumber.add(mobileNumber);
     if (_isMobileNumberValid(mobileNumber)) {
       // update register view object with mobileNumber value
       registerViewObject = registerViewObject.copyWith(
@@ -118,6 +125,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setPassword(String password) {
+    inputPassword.add(password);
     if (_isPasswordValid(password)) {
       // update register view object with password value
       registerViewObject = registerViewObject.copyWith(
@@ -131,6 +139,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setProfilePicture(File file) {
+    inputProfilePicture.add(file);
     if (file.path.isNotEmpty) {
       // update register view object with file value
       registerViewObject = registerViewObject.copyWith(
@@ -144,6 +153,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setUserName(String userName) {
+    inputUserName.add(userName);
     if (_isUserNameValid(userName)) {
       // update register view object with username value
       registerViewObject = registerViewObject.copyWith(
@@ -289,7 +299,7 @@ abstract class RegisterViewModelOutput {
 
   Stream<String?> get outputErrorPassword;
 
-  Stream<File> get outputProfilePicture;
+  Stream<File?> get outputProfilePicture;
 
   Stream<bool> get outputIsAllInputsValid;
 }
