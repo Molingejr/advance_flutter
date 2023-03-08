@@ -5,9 +5,11 @@ import 'package:advance_flutter/data/network/dio_factory.dart';
 import 'package:advance_flutter/data/network/network_info.dart';
 import 'package:advance_flutter/data/repository/repository_impl.dart';
 import 'package:advance_flutter/domain/repository/repository.dart';
+import 'package:advance_flutter/domain/usecase/home_usecase.dart';
 import 'package:advance_flutter/domain/usecase/login_usecase.dart';
 import 'package:advance_flutter/domain/usecase/register_usecase.dart';
 import 'package:advance_flutter/presentation/login/login_viewmodel.dart';
+import 'package:advance_flutter/presentation/main/home/home_viewmodel.dart';
 import 'package:advance_flutter/presentation/register/register_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
@@ -71,5 +73,12 @@ initRegisterModule() {
     instance.registerFactory<RegisterViewModel>(
         () => RegisterViewModel(instance()));
     instance.registerFactory<ImagePicker>(() => ImagePicker());
+  }
+}
+
+initHomeModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+    instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
   }
 }
