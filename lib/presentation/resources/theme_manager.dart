@@ -75,6 +75,7 @@ ThemeData getApplicationTheme() {
       ),
       caption: getRegularStyle(color: ColorManager.grey1),
       bodyText1: getRegularStyle(color: ColorManager.grey),
+      bodyText2: getMediumStyle(color: ColorManager.lightGrey),
     ),
 
     // input decoration theme (text form field)

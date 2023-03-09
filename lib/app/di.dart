@@ -18,6 +18,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:advance_flutter/domain/usecase/forgot_password_usecase.dart';
 import 'package:advance_flutter/presentation/forgot_password/forgot_password_viewmodel.dart';
+import 'package:advance_flutter/domain/usecase/store_details_usecase.dart';
+import 'package:advance_flutter/presentation/store_details/store_details_viewmodel.dart';
 
 final instance = GetIt.instance;
 
@@ -85,5 +87,14 @@ initHomeModule() {
   if (!GetIt.I.isRegistered<HomeUseCase>()) {
     instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
     instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
+  }
+}
+
+initStoreDetailsModule() {
+  if (!GetIt.I.isRegistered<StoreDetailsUseCase>()) {
+    instance.registerFactory<StoreDetailsUseCase>(
+        () => StoreDetailsUseCase(instance()));
+    instance.registerFactory<StoreDetailsViewModel>(
+        () => StoreDetailsViewModel(instance()));
   }
 }
