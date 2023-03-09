@@ -1,4 +1,5 @@
 import 'package:advance_flutter/presentation/resources/language_manager.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
@@ -16,6 +17,30 @@ class AppPreferences {
       return language;
     } else {
       return LanguageType.ENGLISH.getValue();
+    }
+  }
+
+  Future<void> setLanguageChanged() async {
+    String currentLanguage = await getAppLanguage();
+    if (currentLanguage == LanguageType.ARABIC.getValue()) {
+      // save prefs with english lang
+      _sharedPreferences.setString(
+          PREFS_KEY_LANG, LanguageType.ENGLISH.getValue());
+    } else {
+      // save prefs with arabic lang
+      _sharedPreferences.setString(
+          PREFS_KEY_LANG, LanguageType.ARABIC.getValue());
+    }
+  }
+
+  Future<Locale> getLocale() async {
+    String currentLanguage = await getAppLanguage();
+    if (currentLanguage == LanguageType.ARABIC.getValue()) {
+      // return arabic locale
+      return ARABIC_LOCALE;
+    } else {
+      // return english locale
+      return ENGLISH_LOCALE;
     }
   }
 
