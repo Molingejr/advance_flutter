@@ -1,4 +1,5 @@
 import 'package:advance_flutter/data/network/failure.dart';
+import 'package:advance_flutter/presentation/resources/strings_manager.dart';
 import 'package:dio/dio.dart';
 
 enum DataSource {
@@ -124,27 +125,37 @@ class ResponseCode {
 
 class ResponseMessage {
   // API status codes
-  static const String SUCCESS = "Success"; // success with data
+  static const String SUCCESS = AppStrings.success; // success with data
   static const String NO_CONTENT =
-      "Success with no content"; // success with no content
+      AppStrings.noContent; // success with no content
   static const String BAD_REQUEST =
-      "Bad request, try again later"; // failure, api rejected the request
+      AppStrings.badRequestError; // failure, api rejected the request
   static const String FORBIDDEN =
-      "Forbidden request, try again later"; // failure, api rejected the request
+      AppStrings.forbiddenError; // failure, api rejected the request
   static const String UNAUTHORISED =
-      "User is unauthorised, try again later"; // failure user is not authorised
+      AppStrings.unauthorizedError; // failure user is not authorised
   static const String NOT_FOUND =
-      "Url is not found, try again later"; // failure, api url is not correct and not found
+      AppStrings.notFoundError; // failure, api url is not correct and not found
   static const String INTERNAL_SERVER_ERROR =
-      "Something went wrong, try again later"; // failure, crash happened in server side
+      AppStrings.internalServerError; // failure, crash happened in server side
 
-  // local status codes
-  static const String DEFAULT = "Something went wrong, try again later";
-  static const String CONNECT_TIMEOUT = "Timeout error, try again later";
-  static const String CANCEL = "Request was cancelled, try again later";
-  static const String RECEIVE_TIMEOUT = "Timeout error, try again later";
-  static const String SEND_TIMEOUT = "Timeout error, try again later";
-  static const String CACHE_ERROR = "Cache error, try again later";
-  static const String NO_INTERNET_CONNECTION =
-      "Please check your internet connection";
+  // local responses codes
+  static const String DEFAULT =
+      AppStrings.defaultError; // unknown error happened
+  static const String CONNECT_TIMEOUT =
+      AppStrings.timeoutError; // issue in connectivity
+  static const String CANCEL =
+      AppStrings.defaultError; // API request was cancelled
+  static const String RECEIVE_TIMEOUT =
+      AppStrings.timeoutError; //  issue in connectivity
+  static const String SEND_TIMEOUT =
+      AppStrings.timeoutError; //  issue in connectivity
+  static const String CACHE_ERROR = AppStrings
+      .defaultError; //  issue in getting data from local data source (cache)
+  static const String NO_INTERNET_CONNECTION = AppStrings.noInternetError;
+}
+
+class ApiInternalStatus {
+  static const int SUCCESS = 0;
+  static const int FAILURE = 1;
 }
