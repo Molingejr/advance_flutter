@@ -33,10 +33,12 @@ class _LoginViewState extends State<LoginView> {
     _passwordController
         .addListener(() => _viewModel.setPassword(_passwordController.text));
     _viewModel.isUserLoggedInSuccessfullyStreamController.stream
-        .listen((isSuccessLoggedIn) {
+        .listen((token) {
       // navigate to main screen
       SchedulerBinding.instance?.addPostFrameCallback((_) {
         _appPreferences.setIsUserLoggedIn();
+        _appPreferences.setUserToken(token);
+        resetAllModules();
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
       });
     });
@@ -154,8 +156,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, Routes.registerRoute);
+                        Navigator.pushNamed(context, Routes.registerRoute);
                       },
                       child: Text(
                         AppStrings.registerText,
