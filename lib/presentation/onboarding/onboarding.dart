@@ -10,6 +10,7 @@ import 'package:advance_flutter/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     AppStrings.skip,
                     textAlign: TextAlign.end,
                     style: Theme.of(context).textTheme.subtitle2,
-                  ),
+                  ).tr(),
                 ),
               ),
               // add layout for indicator and arrows

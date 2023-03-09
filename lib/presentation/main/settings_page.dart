@@ -5,6 +5,7 @@ import 'package:advance_flutter/presentation/resources/assets_manager.dart';
 import 'package:advance_flutter/presentation/resources/routes_manager.dart';
 import 'package:advance_flutter/presentation/resources/strings_manager.dart';
 import 'package:advance_flutter/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             AppStrings.changeLanguage,
             style: Theme.of(context).textTheme.headline4,
-          ),
+          ).tr(),
           leading: SvgPicture.asset(ImageAssets.changeLangIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
           onTap: () {
@@ -39,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             AppStrings.contactUs,
             style: Theme.of(context).textTheme.headline4,
-          ),
+          ).tr(),
           leading: SvgPicture.asset(ImageAssets.contactUsIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
           onTap: () {
@@ -50,7 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             AppStrings.inviteYourFriends,
             style: Theme.of(context).textTheme.headline4,
-          ),
+          ).tr(),
           leading: SvgPicture.asset(ImageAssets.inviteFriendsIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
           onTap: () {
@@ -61,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             AppStrings.logout,
             style: Theme.of(context).textTheme.headline4,
-          ),
+          ).tr(),
           leading: SvgPicture.asset(ImageAssets.logoutIc),
           trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIc),
           onTap: () {

@@ -26,7 +26,7 @@ class AppStrings {
   static const String resetPassword = "reset_password";
   static const String success = "success";
   static const String profilePicture = "upload_profile_picture";
-  static const String photoGalley = "photo_gallery";
+  static const String photoGallery = "photo_gallery";
   static const String photoCamera = "camera";
   static const String register = "register";
   static const String haveAccount = "already_have_account";
