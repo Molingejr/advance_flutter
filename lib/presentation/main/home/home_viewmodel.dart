@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInputs, HomeViewModelOutputs {
-  HomeUseCase _homeUseCase;
+  final HomeUseCase _homeUseCase;
 
   final _dataStreamController = BehaviorSubject<HomeViewObject>();
 
@@ -45,6 +45,7 @@ class HomeViewModel extends BaseViewModel
   Sink get inputHomeData => _dataStreamController.sink;
 
   // outputs
+  @override
   Stream<HomeViewObject> get outputHomeData =>
       _dataStreamController.stream.map((data) => data);
 }

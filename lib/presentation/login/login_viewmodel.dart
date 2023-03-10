@@ -8,17 +8,17 @@ import 'package:advance_flutter/presentation/common/state_renderer/state_rendere
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
-  StreamController _userNameStreamController =
+  final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
-  StreamController _passwordStreamController =
+  final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
-  StreamController _isAllInputsValidStreamController =
+  final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
-  StreamController isUserLoggedInSuccessfullyStreamController =
+  final StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<String>();
 
   var loginObject = LoginObject("", "");
-  LoginUseCase _loginUseCase;
+  final LoginUseCase _loginUseCase;
 
   LoginViewModel(this._loginUseCase);
 

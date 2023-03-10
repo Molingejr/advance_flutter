@@ -25,17 +25,18 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  RegisterViewModel _viewModel = instance<RegisterViewModel>();
-  AppPreferences _appPreferences = instance<AppPreferences>();
+  final RegisterViewModel _viewModel = instance<RegisterViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   ImagePicker picker = instance<ImagePicker>();
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController _userNameTextEditingController =
+  final TextEditingController _userNameTextEditingController =
       TextEditingController();
-  TextEditingController _mobileNumberTextEditingController =
+  final TextEditingController _mobileNumberTextEditingController =
       TextEditingController();
-  TextEditingController _emailTextEditingController = TextEditingController();
-  TextEditingController _passwordTextEditingController =
+  final TextEditingController _emailTextEditingController =
+      TextEditingController();
+  final TextEditingController _passwordTextEditingController =
       TextEditingController();
 
   @override
@@ -141,7 +142,7 @@ class _RegisterViewState extends State<RegisterView> {
                             showCountryOnly: true,
                             hideMainText: true,
                             showOnlyCountryWhenClosed: true,
-                            favorite: ["+237", "+966" "+02", "+39"],
+                            favorite: const ["+237", "+966" "+02", "+39"],
                           )),
                       Expanded(
                         flex: 3,

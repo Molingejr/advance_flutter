@@ -8,7 +8,7 @@ class Test extends StatelessWidget {
     MyApp.instance.appState = 10;
   }
   void getAppState(){
-    print(MyApp.instance.appState);
+    debugPrint(MyApp.instance.appState.toString());
   }
   @override
   Widget build(BuildContext context) {

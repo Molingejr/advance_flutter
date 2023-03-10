@@ -20,9 +20,9 @@ class OnBoardingView extends StatefulWidget {
 }
 
 class _OnBoardingViewState extends State<OnBoardingView> {
-  PageController _pageController = PageController(initialPage: 0);
-  OnBoardingViewModel _viewModel = OnBoardingViewModel();
-  AppPreferences _appPreferences = instance<AppPreferences>();
+  final PageController _pageController = PageController(initialPage: 0);
+  final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   _bind() {
     _appPreferences.setOnBoardingScreenViewed();
@@ -170,8 +170,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 }
 
 class OnBoardingPage extends StatelessWidget {
-  OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
-  SliderObject _sliderObject;
+  const OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
+  final SliderObject _sliderObject;
 
   @override
   Widget build(BuildContext context) {

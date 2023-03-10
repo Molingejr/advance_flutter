@@ -10,28 +10,28 @@ import 'package:advance_flutter/presentation/common/state_renderer/state_rendere
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInput, RegisterViewModelOutput {
-  StreamController _userNameStreamController =
+  final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
 
-  StreamController _mobileNumberStreamController =
+  final StreamController _mobileNumberStreamController =
       StreamController<String>.broadcast();
 
-  StreamController _emailStreamController =
+  final StreamController _emailStreamController =
       StreamController<String>.broadcast();
 
-  StreamController _passwordStreamController =
+  final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
 
-  StreamController _profilePictureStreamController =
+  final StreamController _profilePictureStreamController =
       StreamController<File>.broadcast();
 
-  StreamController _isAllInputsValidStreamController =
+  final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
-  StreamController isUserLoggedInSuccessfullyStreamController =
-  StreamController<bool>();
+  final StreamController isUserLoggedInSuccessfullyStreamController =
+      StreamController<bool>();
 
-  RegisterUseCase _registerUseCase;
+  final RegisterUseCase _registerUseCase;
   var registerViewObject = RegisterObject("", "", "", "", "", "");
 
   RegisterViewModel(this._registerUseCase);
@@ -45,8 +45,8 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   register() async {
-    inputState.add(LoadingState(
-        stateRendererType: StateRendererType.POPUP_LOADING_STATE));
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _registerUseCase.execute(RegisterUseCaseInput(
       registerViewObject.mobileNumber,
       registerViewObject.countryMobileCode,
@@ -59,8 +59,7 @@ class RegisterViewModel extends BaseViewModel
             (failure) => {
                   // left -> failure
                   inputState.add(ErrorState(
-                      StateRendererType.POPUP_ERROR_STATE,
-                      failure.message))
+                      StateRendererType.POPUP_ERROR_STATE, failure.message))
                 }, (data) {
       // right -> success (data)
       inputState.add(ContentState());

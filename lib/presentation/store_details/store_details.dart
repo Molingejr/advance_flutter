@@ -59,7 +59,7 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
           centerTitle: true,
         ),
         body: Container(
-          constraints: BoxConstraints.expand(),
+          constraints: const BoxConstraints.expand(),
           color: ColorManager.white,
           child: SingleChildScrollView(
             child: StreamBuilder<StoreDetails>(

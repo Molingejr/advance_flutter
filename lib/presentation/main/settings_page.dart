@@ -20,8 +20,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  AppPreferences _appPreferences = instance<AppPreferences>();
-  LocalDataSource _localDataSource = instance<LocalDataSource>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+  final LocalDataSource _localDataSource = instance<LocalDataSource>();
 
   @override
   Widget build(BuildContext context) {
